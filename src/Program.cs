@@ -77,6 +77,34 @@ namespace MultiVirtDesk
                     Application.Run(new MoveDialog(target, storage, vd));
                     return;
                 }
+                else if (cmd == "--save-layout")
+                {
+                    using (VirtualDesktopService vd = new VirtualDesktopService())
+                    {
+                        DesktopInfo cur = vd.GetCurrentDesktop();
+                        if (cur != null)
+                        {
+                            string vault = storage.GetVaultDirectory(cur.Id);
+                            IconLayoutManager.SavePositions(vault);
+                            Console.WriteLine("Icon positions saved for workspace: " + cur.Name);
+                        }
+                    }
+                    return;
+                }
+                else if (cmd == "--restore-layout")
+                {
+                    using (VirtualDesktopService vd = new VirtualDesktopService())
+                    {
+                        DesktopInfo cur = vd.GetCurrentDesktop();
+                        if (cur != null)
+                        {
+                            string vault = storage.GetVaultDirectory(cur.Id);
+                            IconLayoutManager.RestorePositions(vault);
+                            Console.WriteLine("Icon positions restored for workspace: " + cur.Name);
+                        }
+                    }
+                    return;
+                }
                 else if (cmd == "--status")
                 {
                     Console.WriteLine("\n=== MultiVirtDesk Status ===");

@@ -167,6 +167,13 @@ namespace MultiVirtDesk.Storage
                     oldId = currentRecorded;
                 }
 
+                // 0. Save outgoing icon positions before moving files
+                if (oldId != Guid.Empty)
+                {
+                    string oldVault = GetVaultDirectory(oldId);
+                    IconLayoutManager.SavePositions(oldVault);
+                }
+
                 // 1. Stash outgoing items
                 if (oldId != Guid.Empty && Directory.Exists(_desktopPath))
                 {
@@ -239,6 +246,13 @@ namespace MultiVirtDesk.Storage
 
                 // 4. Instant Explorer view update
                 ShellHelper.RefreshDesktop(_desktopPath);
+
+                // 5. Restore incoming icon positions
+                if (newId != Guid.Empty)
+                {
+                    string newVault = GetVaultDirectory(newId);
+                    IconLayoutManager.RestorePositions(newVault);
+                }
             }
         }
 

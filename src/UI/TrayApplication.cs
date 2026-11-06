@@ -171,11 +171,15 @@ namespace MultiVirtDesk.UI
 
             // 3. Vault & file management
             ToolStripMenuItem openVault = new ToolStripMenuItem("Open Desktop Vault Folder", null, (s, e) => OpenCurrentVault());
+            ToolStripMenuItem saveLayout = new ToolStripMenuItem("Save Current Icon Layout", null, (s, e) => SaveCurrentLayout());
+            ToolStripMenuItem restoreLayout = new ToolStripMenuItem("Restore Saved Icon Layout", null, (s, e) => RestoreCurrentLayout());
             ToolStripMenuItem managePinned = new ToolStripMenuItem("Manage Pinned Icons (All Desktops)...", null, (s, e) => OpenPinnedFile());
             ToolStripMenuItem adoptPublic = new ToolStripMenuItem("Adopt Public Desktop Shortcuts", null, (s, e) => PromptAdoptPublic());
             ToolStripMenuItem refresh = new ToolStripMenuItem("Refresh Desktop Icons", null, (s, e) => ShellHelper.RefreshDesktop(_storage.DesktopPath));
 
             _contextMenu.Items.Add(openVault);
+            _contextMenu.Items.Add(saveLayout);
+            _contextMenu.Items.Add(restoreLayout);
             _contextMenu.Items.Add(managePinned);
             _contextMenu.Items.Add(adoptPublic);
             _contextMenu.Items.Add(refresh);
@@ -216,6 +220,24 @@ namespace MultiVirtDesk.UI
                 Process.Start("explorer.exe", vault);
             }
             catch { }
+        }
+
+        private void SaveCurrentLayout()
+        {
+            if (_currentDesktop == null) return;
+            string vault = _storage.GetVaultDirectory(_currentDesktop.Id);
+            IconLayoutManager.SavePositions(vault);
+            if (_notifyIcon != null)
+            {
+                _notifyIcon.ShowBalloonTip(2000, "MultiVirtDesk", string.Format("Icon layout saved for \"{0}\"", _currentDesktop.Name), ToolTipIcon.Info);
+            }
+        }
+
+        private void RestoreCurrentLayout()
+        {
+            if (_currentDesktop == null) return;
+            string vault = _storage.GetVaultDirectory(_currentDesktop.Id);
+            IconLayoutManager.RestorePositions(vault);
         }
 
         private void OpenPinnedFile()
