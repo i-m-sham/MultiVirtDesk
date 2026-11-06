@@ -11,7 +11,7 @@ if not exist "%CSC_PATH%" (
     exit /b 1
 )
 
-set SOURCES=src\Program.cs src\VirtualDesktop\ComInterfaces.cs src\VirtualDesktop\VirtualDesktopService.cs src\Storage\DesktopStorageManager.cs src\Shell\ShellHelper.cs src\Shell\ShellContextMenu.cs src\UI\TrayApplication.cs src\UI\MoveDialog.cs
+set SOURCES=src\Program.cs src\VirtualDesktop\ComInterfaces.cs src\VirtualDesktop\VirtualDesktopService.cs src\Storage\DesktopStorageManager.cs src\Shell\ShellHelper.cs src\Shell\ShellContextMenu.cs src\Shell\IconLayoutManager.cs src\UI\TrayApplication.cs src\UI\MoveDialog.cs
 set REFS=/r:System.dll /r:System.Windows.Forms.dll /r:System.Drawing.dll
 
 echo [1/2] Compiling MultiVirtDesk.exe (Background Tray Engine)...

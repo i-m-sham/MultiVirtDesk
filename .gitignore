@@ -1,0 +1,16 @@
+# Build artifacts & temp files
+*.pdb
+*.ilk
+*.obj
+*.log
+*.tmp
+test_*.*
+out.txt
+
+# Visual Studio / VS Code
+.vs/
+.vscode/
+
+# OS metadata
+Thumbs.db
+desktop.ini

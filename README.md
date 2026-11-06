@@ -9,6 +9,7 @@
 ## Key Features
 
 - **Unique Icons per Virtual Desktop**: Dedicate one workspace to **Studying** (AI tools, assignment documents, research papers), another to **Gaming** (Steam, game shortcuts, Discord), and another to **Development**—all with completely different desktop icons and files.
+- **Pixel-Perfect Icon Layout Memory**: Remembers the exact `(X, Y)` grid coordinates of your icons for each virtual workspace using Windows Shell `IFolderView`. When you switch back to a desktop, your icons snap back to the exact positions where you arranged them.
 - **100% Dynamic & Zero Hardcoding**: Create, name, or rename desktops in Windows Task View (`Win + Tab`) at any time. MultiVirtDesk automatically detects the names (e.g. *"Studying"*, *"Gaming"*, *"Work"*) and synchronizes their storage vaults automatically.
 - **0% Idle CPU & Low Footprint**: Uses Windows internal COM push-event notifications (`IVirtualDesktopNotification`). Sleeps waiting on Windows shell events. No background polling, no battery drain, and uses under 15 MB of RAM.
 - **Instant NTFS Metadata Swaps**: File swapping uses atomic NTFS metadata relocation (`MoveFileExW`). 50 desktop icons swap in less than 10 milliseconds, synchronized with the Windows virtual desktop slide animation.
@@ -147,6 +148,8 @@ You can manage MultiVirtDesk directly from PowerShell or Command Prompt:
 | Command | Description |
 | :--- | :--- |
 | `MultiVirtDesk-cli.exe --status` | Shows the active desktop, list of all workspaces, and pinned items |
+| `MultiVirtDesk-cli.exe --save-layout` | Manually snapshots the current desktop's icon coordinates |
+| `MultiVirtDesk-cli.exe --restore-layout` | Manually restores the current desktop's saved icon coordinates |
 | `MultiVirtDesk-cli.exe --pin "<filename>"` | Pins an item so it appears on all virtual desktops |
 | `MultiVirtDesk-cli.exe --unpin "<filename>"` | Unpins an item |
 | `MultiVirtDesk-cli.exe --dialog-move "<file>"` | Opens the interactive desktop destination picker |
